@@ -1,21 +1,58 @@
-{% load bootstrap3 %}
-{% block title %}Home{% endblock %}
-{% block content %}
-{% if not user.is_authenticated %}
-    <h1> Hello {{user.username}}</h1>
-{% else %}
-    <h1> Hello , You Need to Sign In </h1>
-        <div class="container">
-            <div class="span2">
-            <p class="text-center"><a class="btn btn-lg btn-primary"
-				  href="{% url 'registration_register' %}">Register</a>
-			  &nbsp;
-              <a class="btn btn-lg btn-success"
-				  href="{% url 'django.contrib.auth.views.login' %}">Sign in</a>
-            </p>
-            </div>
-        </div>
+{% extends "base.html" %}
 
+
+{% load bootstrap3 %}
+{% block content %}
+
+ <header class="header black-bg">
+              <div class="sidebar-toggle-box">
+                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+              </div>
+            <!--logo start-->
+            <a href="index.html" class="logo"><b>Wall Path Survey</b></a>
+            <!--logo end-->
+
+            <div class="top-menu">
+            	<ul class="nav pull-right top-menu">
+                    {% if not user.is_authenticated %}
+                    <li> <a class="logout"
+				  href="{% url 'django.contrib.auth.views.login' %}">Sign in</a></li>
+                    {% else %}
+
+                    <li><a class="logout" href="{% url 'django.contrib.auth.views.logout' %}">Logout</a></li>
+                    {% endif %}
+            	</ul>
+            </div>
+        </header>
+
+
+{% if  user.is_authenticated %}
+
+
+    <h1> Hello {{user.username}}</h1>
+    <div class="col-md-12 mt">
+	                  	<div class="content-panel">
+	                          <table class="table table-hover">
+	                  	  	  <h4><i class="fa fa-angle-right"></i> Patient List</h4>
+	                  	  	  <hr>
+	                              <thead>
+	                              <tr>
+	                                  <th>#</th>
+	                                  <th>Patient Id</th>
+
+	                              </tr>
+	                              </thead>
+	                              <tbody>
+                                    
+	                              <tr>
+	                                  <td>1</td>
+	                                  <td>Mark</td>
+	                              </tr>
+
+	                              </tbody>
+	                          </table>
+	                  	  </div><! --/content-panel -->
+	                  </div><!--
  {% endif %}
 
 {% endblock content %}
