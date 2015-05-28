@@ -1,0 +1,21 @@
+{% load bootstrap3 %}
+{% block title %}Home{% endblock %}
+{% block content %}
+{% if not user.is_authenticated %}
+    <h1> Hello {{user.username}}</h1>
+{% else %}
+    <h1> Hello , You Need to Sign In </h1>
+        <div class="container">
+            <div class="span2">
+            <p class="text-center"><a class="btn btn-lg btn-primary"
+				  href="{% url 'registration_register' %}">Register</a>
+			  &nbsp;
+              <a class="btn btn-lg btn-success"
+				  href="{% url 'django.contrib.auth.views.login' %}">Sign in</a>
+            </p>
+            </div>
+        </div>
+
+ {% endif %}
+
+{% endblock content %}

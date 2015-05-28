@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block title %}Sign in{% endblock %}
+
+{% block content %}
+
+  <div class="wrapper">
+      <div class="block-center mt-xl wd-xl">
+          <div class="container">
+  <div class="row">
+    <div class="col-sm-offset-2 col-sm-10">
+      <h1>Sign in</h1>
+      <p>Not yet registered?
+        <a href="{% url 'registration_register' %}">Register now for free!</a></p>
+      <p>Trouble signing in?
+        <a href="{% url 'django.contrib.auth.views.password_reset' %}">Reset password.</a></p>
+    </div>
+  </div>
+
+  {% if form.errors %}
+  <div class="row">
+    <div class="alert alert-danger col-sm-offset-2 col-sm-6">
+      <p><strong>Login failed. Try again...</strong></p>
+    </div>
+  </div>
+  {% endif %}
+
+  <form action="{% url 'django.contrib.auth.views.login' %}"
+      method="post"
+      role="form"
+      class="form-horizontal">
+    {% csrf_token %}
+
+    {% bootstrap_field form.username layout='horizontal' %}
+    {% bootstrap_field form.password layout='horizontal' %}
+    {% if next %}
+      <input type="hidden" name="next" value="{{ next }}" />
+    {% else %}
+      <input type="hidden" name="next" value="{% url 'home' %}" />
+    {% endif %}
+    {% buttons %}
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary">
+        {% bootstrap_icon "star" %} Login
+      </button>
+    </div>
+    {% endbuttons %}
+  </form>
+
+
+
+
+ <!--<div class="wrapper">-->
+      <!--<div class="block-center mt-xl wd-xl">-->
+         <!--&lt;!&ndash; START panel&ndash;&gt;-->
+         <!--<div class="panel panel-dark panel-flat">-->
+            <!--<div class="panel-heading text-center">-->
+               <!--<a href="#">-->
+                  <!--<img src="img/logo.png" alt="Image" class="block-center img-rounded">-->
+               <!--</a>-->
+            <!--</div>-->
+            <!--<div class="panel-body">-->
+               <!--<p class="text-center pv">SIGN IN TO CONTINUE.</p>-->
+               <!--<form role="form"-->
+                     <!--action="{% url 'django.contrib.auth.views.login' %}"-->
+                     <!--method="post"-->
+                     <!--data-parsley-validate="" novalidate="" class="mb-lg">-->
+                 <!--{% csrf_token %}-->
+                  <!--<div class="form-group has-feedback">-->
+                     <!--<input id="username" type="email" placeholder="Enter email" name="username" required class="form-control">-->
+                     <!--<span class="fa fa-envelope form-control-feedback text-muted"></span>-->
+                  <!--</div>-->
+                  <!--<div class="form-group has-feedback">-->
+                     <!--<input id="password" type="password" placeholder="Password"  name="password" required class="form-control">-->
+                     <!--<span class="fa fa-lock form-control-feedback text-muted"></span>-->
+                  <!--</div>-->
+                  <!--<div class="clearfix">-->
+                     <!--<div class="checkbox c-checkbox pull-left mt0">-->
+                        <!--<label>-->
+                           <!--<input type="checkbox" value="" name="remember">-->
+                           <!--<span class="fa fa-check"></span>Remember Me</label>-->
+                     <!--</div>-->
+                     <!--<div class="pull-right"><a href="recover.html" class="text-muted">Forgot your password?</a>-->
+                     <!--</div>-->
+                  <!--</div>-->
+                  <!--{% if next %}-->
+      <!--<input type="hidden" name="next" value="{{ next }}" />-->
+    <!--{% else %}-->
+      <!--<input type="hidden" name="next" value="{% url 'home' %}" />-->
+    <!--{% endif %}-->
+                  <!--<button type="submit" class="btn btn-block btn-primary mt-lg">Login</button>-->
+               <!--</form>-->
+               <!--<p class="pt-lg text-center">Need to Signup?</p><a href="register.html" class="btn btn-block btn-default">Register Now</a>-->
+            <!--</div>-->
+         </div>
+         <!-- END panel-->
+         <div class="p-lg text-center">
+            <span>&copy;</span>
+            <span>2015</span>
+            <span>-</span>
+            <span>Angle</span>
+            <br>
+            <span>Bootstrap Admin Template</span>
+         </div>
+      </div>
+   </div>
+
+{% endblock %}
+
+
+

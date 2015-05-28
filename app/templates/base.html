@@ -1,0 +1,40 @@
+    {% load static from staticfiles %}
+    {% load bootstrap3 %}
+    <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>{% block title %}{% endblock %}</title>
+        {% bootstrap_css %}
+
+      </head>
+
+    <body>
+
+
+    {% block content %}
+    {% endblock %}
+
+
+      <div id="page-footer">
+        <div class="container">
+          <footer>
+            <hr />
+             <div class="p-lg text-center">
+                <span>&copy;</span>
+                <span>2015</span>
+                <span>-</span>
+                <span>Wall Path</span>
+                <br>
+                <span>Better way ..../span>
+             </div>
+          </footer>
+        </div>
+      </div>
+
+      {% bootstrap_javascript jquery=True %}
+     <!-- =============== VENDOR SCRIPTS ===============-->
+
+    </body>
+    </html>
