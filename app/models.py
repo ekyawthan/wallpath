@@ -11,7 +11,7 @@ class Patient(models.Model):
 
 class Survey(models.Model):
     author = models.CharField(max_length=40)
-    answers = models.CharField(max_length=50)
+    answers = models.CharField(max_length=250)
     choices = models.CharField(max_length=250)
     delay_counter = models.IntegerField(null=False, default=0)
     created_at = models.DateTimeField(auto_now_add=True)

@@ -7,6 +7,8 @@ from django.contrib.auth import views as auth_views
 urlpatterns = patterns('',
 
     url(r'^$', views.home, name="home"),
+    url(r'^patient_detail/(?P<pk>.*)/$', views.patient_detail, name='patient_detail'),
+    url(r'^add_patient/$', views.add_patient, name='add_patient'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^survey/$', views.survey_detail), #api call
     url(r'^user/$', views.user_check),#api call

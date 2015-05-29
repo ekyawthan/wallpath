@@ -28,55 +28,37 @@
 
 {% if  user.is_authenticated %}
 
-
-    	<div class="row mt"  style = 'padding-top:60px'>
-          		<div class="col-lg-12">
-          			<div class="form-panel">
-                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Add New Patient</h4>
-                      <form class="form-inline" role="form" action="{% url 'add_patient' %}" method="post">
-                          <div class="form-group">
-                                {% bootstrap_form form %}
-                          </div>
-
-                          <button type="submit" class="btn btn-theme">Add </button>
-                      </form>
-          			</div><!-- /form-panel -->
-          		</div><!-- /col-lg-12 -->
-          	</div><!-- /row -->
-
-    <div class="col-md-12 mt" style="overflow-y:auto">
-	                  	<div class="content-panel" style="overflow-y:auto">
-                            <div style="overflow-y:auto">
-	                          <table class="table table-hover"  >
-	                  	  	  <h4><i class="fa fa-angle-right"></i> Patient List
-
-                              </h4>
+    <div class="col-md-12 mt" style = 'padding-top:40px'>
+	                  	<div class="content-panel">
+	                          <table class="table table-hover">
+	                  	  	  <h4><i class="fa fa-angle-right"></i> Survey List</h4>
 	                  	  	  <hr>
-
 	                              <thead>
 	                              <tr>
 	                                  <th>#</th>
-	                                  <th>Patient Id</th>
+	                                  <th>Answer</th>
+                                      <th>Choice</th>
+	                                  <th>Delay Counter</th>
+                                      <th>Created At</th>
 
 	                              </tr>
 	                              </thead>
 	                              <tbody>
-                                    {% for i in patients %}
-
+                                  {% for i in surveys %}
 	                              <tr>
-	                                  <td>{{1}}</td>
-	                                  <td><a href="{% url 'patient_detail' i.user_name %}">{{i.user_name}}</a></td>
+	                                  <th>{{i.id}}</th>
+	                                  <th>{{i.answers}}</th>
+                                      <th>{{i.choices}}</th>
+	                                  <th>{{i.delay_counter}}</th>
+                                      <th>{{i.created_at}}</th>
 	                              </tr>
                                   {% endfor %}
 
 	                              </tbody>
 	                          </table>
-                            </div>
 	                  	  </div><! --/content-panel -->
-	                  </div>
-
-<div></div>
-
+	                  </div><!-
+        >-
 
  {% endif %}
 

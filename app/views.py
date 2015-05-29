@@ -8,6 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from django.shortcuts import render
+from .forms import PatientForm
 
 
 class JSONResponse(HttpResponse):
@@ -22,9 +23,9 @@ class JSONResponse(HttpResponse):
 
 def home(request):
     if request.user.is_authenticated():
-        all_patient = Patient.objects.all()
-
-        return render(request, "home.html", locals())
+        form = PatientForm()
+        all_patient = list(Patient.objects.all())
+        return render(request, "home.html", {'patients': all_patient, 'form': form})
     return render(request,  template_name='home.html')
 
 
@@ -34,9 +35,25 @@ def patient_detail(request, pk):
     except Patient.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    survey_from_this_patient = Survey.objects.filter(author=patient.user_name)
+    survey_from_this_patient = list(Survey.objects.filter(author=patient.user_name))
 
-    return render(request, "detail.html", {})
+    return render(request, "detail.html", {'surveys': survey_from_this_patient})
+
+
+def add_patient(request):
+    if request.method == 'POST':
+        form = PatientForm(request.POST)
+        if form.is_valid():
+            form.save()
+            form = PatientForm()
+            all_patient = list(Patient.objects.all())
+            return render(request, "home.html", {'patients': all_patient, 'form': form})
+        form = PatientForm()
+        all_patient = list(Patient.objects.all())
+        return render(request, "home.html", {'patients': all_patient, 'form': form})
+
+
+
 
 
 @api_view(['GET', 'POST'])
