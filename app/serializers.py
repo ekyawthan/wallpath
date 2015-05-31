@@ -7,7 +7,7 @@ from rest_framework import serializers
 class PatientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Patient
-        fields = ('id', 'user_name',)
+        fields = ('user_name',)
 
 
 class SurveySerializer(serializers.ModelSerializer):

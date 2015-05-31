@@ -60,6 +60,14 @@ WSGI_APPLICATION = 'wallpath.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'wallpath',
+#         'USER': 'root',
+#         'PASSWORD': 'Qsan8of12',
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',

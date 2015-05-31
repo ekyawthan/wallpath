@@ -55,31 +55,19 @@ def add_patient(request):
 
 
 
-
-@api_view(['GET', 'POST'])
-def user_check(request, pk=None):
+@csrf_exempt
+def user_check(request, pk):
     try:
         user = Patient.objects.get(pk=pk)
     except Patient.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-
+        return HttpResponse(status=404)
     if request.method == 'GET':
-        user_serializer = PatientSerializer(user)
-        return Response(user_serializer.data)
+        #serializer = PatientSerializer(user)
+        return HttpResponse(status=200)
 
-# @csrf_exempt
-# def survey_detail(request):
-#
-#     if request.method == 'POST':
-#         survey_serializer = SurveySerializer(data=request.data)
-#         if survey_serializer.is_valid():
-#             survey_serializer.save()
-#             return Response(survey_serializer.data, status=status.HTTP_201_CREATED)
-#         return Response(survey_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#     elif request.method == 'GET':
-#         all_surveys = Survey.objects.all()
-#         serializer = SurveySerializer(all_surveys, many=True)
-#         return Response(serializer.data)
+
+
+
 
 @csrf_exempt
 def survey_detail(request):
@@ -93,7 +81,6 @@ def survey_detail(request):
 
     elif request.method == 'POST':
         data = JSONParser().parse(request)
-        print(data)
         serializer = SurveySerializer(data=data)
         if serializer.is_valid():
             serializer.save()
