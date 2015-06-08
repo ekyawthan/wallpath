@@ -9,7 +9,7 @@
                   <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
               </div>
             <!--logo start-->
-            <a href="{% url 'home' %}" class="logo"><b>Wall Path Survey</b></a>
+            <a href="{% url 'home' %}" class="logo"><b>Cf-Smart</b></a>
             <!--logo end-->
 
             <div class="top-menu">
@@ -35,22 +35,43 @@
 	                  	  	  <hr>
 	                              <thead>
 	                              <tr>
-	                                  <th>#</th>
-	                                  <th>Answer</th>
-                                      <th>Choice</th>
-	                                  <th>Delay Counter</th>
-                                      <th>Created At</th>
+
+	                                  <th>Q1</th>
+                                      <th>Q2</th>
+	                                  <th>Q3</th>
+                                      <th>Q4</th>
+                                      <th>Q5</th>
+	                                  <th>Q6</th>
+                                      <th>Q7</th>
+                                      <th>Q8</th>
+	                                  <th>Q9</th>
+                                      <th>Q10</th>
+                                      <th>Q11</th>
+	                                  <th>Q12</th>
+                                      <th>Delay</th>
+                                      <th>At</th>
 
 	                              </tr>
 	                              </thead>
 	                              <tbody>
                                   {% for i in surveys %}
 	                              <tr>
-	                                  <th>{{i.id}}</th>
-	                                  <th>{{i.answers}}</th>
-                                      <th>{{i.choices}}</th>
-	                                  <th>{{i.delay_counter}}</th>
+	                                  <th>{{i.question1}}</th>
+                                      <th>{{i.question2}}</th>
+	                                  <th>{{i.question3}}</th>
+	                                  <th>{{i.question4}}</th>
+	                                  <th>{{i.question5}}</th>
+	                                  <th>{{i.question6}}</th>
+                                      <th>{{i.question7}}</th>
+                                      <th>{{i.question8}}</th>
+	                                  <th>{{i.question9}}</th>
+	                                  <th>{{i.question10}}</th>
+	                                  <th>{{i.question11}}</th>
+	                                  <th>{{i.question12}}</th>
+                                      <th>{{i.delay_counter}}</th>
                                       <th>{{i.created_at}}</th>
+
+
 	                              </tr>
                                   {% endfor %}
 

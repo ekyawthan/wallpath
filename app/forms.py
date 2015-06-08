@@ -1,6 +1,6 @@
 
 from django import forms
-from models import Patient
+from .models import Patient
 
 
 class PatientForm(forms.ModelForm):
@@ -9,3 +9,4 @@ class PatientForm(forms.ModelForm):
     class Meta:
         model = Patient
         exclude = ('created_at',)
+        
