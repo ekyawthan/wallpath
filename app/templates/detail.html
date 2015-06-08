@@ -28,9 +28,9 @@
 
 {% if  user.is_authenticated %}
 
-    <div class="col-md-12 mt" style = 'padding-top:40px'>
-	                  	<div class="content-panel">
-	                          <table class="table table-hover">
+    <div class="col-md-12 mt" style="height: 100%; overflow-y: auto; width: 100%; padding-top:60px;">
+
+	                          <table class="table table-fixed">
 	                  	  	  <h4><i class="fa fa-angle-right"></i> Survey List</h4>
 	                  	  	  <hr>
 	                              <thead>
@@ -78,8 +78,7 @@
 	                              </tbody>
 	                          </table>
 	                  	  </div><! --/content-panel -->
-	                  </div><!-
-        >-
+
 
  {% endif %}
 
