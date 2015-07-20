@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'bootstrap3',
     'registration',
     'app',
+    'kronos',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -68,6 +69,7 @@ WSGI_APPLICATION = 'wallpath.wsgi.application'
 #         'PASSWORD': 'Qsan8of12',
 #     }
 # }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -76,7 +78,6 @@ DATABASES = {
         'PASSWORD': 'password123',
     }
 }
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
@@ -105,8 +106,8 @@ TEMPLATE_DIRS = (
     #os.path.join(BASE_DIR, "/nourisherbook/templates"),
 )
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-REGISTRATION_AUTO_LOGIN = True
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#REGISTRATION_AUTO_LOGIN = True
 
 
 

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+
+{% load bootstrap3 %}
+{% block content %}
+
+ <header class="header black-bg">
+              <div class="sidebar-toggle-box">
+                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+              </div>
+            <!--logo start-->
+            <a href="{% url 'home' %}" class="logo"><b>Cf-Smart</b></a>
+            <!--logo end-->
+
+            <div class="top-menu">
+              <ul class="nav pull-right top-menu">
+                    {% if not user.is_authenticated %}
+                    <li> <a class="logout"
+          href="{% url 'django.contrib.auth.views.login' %}">Sign in</a></li>
+                    {% else %}
+
+                    <li><a class="logout" href="{% url 'django.contrib.auth.views.logout' %}">Logout</a></li>
+                    {% endif %}
+              </ul>
+            </div>
+        </header>
+
+
+{% if  user.is_authenticated %}
+
+  <div class="col-md-12 mt" style="height: 100%;add_patient overflow-y: auto; width: 100%; padding-top:60px;">
+    <form action="{% url 'Email' %}" method="post">
+      <h4>Emails (Seperated By Comma):</h4>
+      <textarea name="Email_Adresses" rows="10" cols="100">{{emails}}</textarea>
+    </br>
+      <button type="submit" class="btn btn-theme">Save Email Information </button>
+    </form>
+                           
+  </div>
+                        <!-- /content-panel -->
+
+
+ {% endif %}
+
+{% endblock content %}
