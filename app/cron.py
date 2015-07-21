@@ -1,4 +1,5 @@
-# app/cron.py
+# app/cron.py 
+#MUST CHANGE INFORMATION IN THE sendEmail METHOD TO YOUR EMAIL CREDINCIALS 
 
 import kronos
 import random
@@ -15,7 +16,7 @@ from .models import Patient, Survey
 
 SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 
-@kronos.register('0 10 * * 1')
+@kronos.register('0 10 * * 2')
 def complain():
     sendEmail()
 
