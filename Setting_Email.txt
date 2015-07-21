@@ -1,0 +1,7 @@
+Setting up Email System:
+
+1)install django-kronos (pip install django-kronos)
+2)go to the directery project is located in and migrate the system (python manage.py migrate) 
+3)Then install the cron tasks (python manage.py installtasks) 
+4)Then you should have a system that every tuesday @10 am send an email of the last week of information
+5)Change the my_username, my_password, my_port, my_host in the sendEmail method in cron.py which is located in the app folder to your email credentials(it's at the bottom of the page)
