@@ -43,7 +43,7 @@ def patient_detail(request, pk):
 
     survey_from_this_patient = list(Survey.objects.filter(author=patient.user_name))
 
-    return render(request, "detail.html", {'surveys': survey_from_this_patient, 'username': patient.user_name})
+    return render(request, "detail.html", {'surveys': survey_from_this_patient})
 
 
 def add_patient(request):
@@ -131,67 +131,4 @@ def saveEmails(csv):
     myfile = open("app/Email_Adresses.csv", 'w')
     myfile.write(csv)
     return True
- 
-def formatMessage():
-    lastWeek = timezone.now().date() - timedelta(days=7)#get last week Date to get one week of Information for the email
-
-    surveys = list(Survey.objects.filter(created_at__gte=lastWeek))
-    message  = ""
-    message += "ID"
-    message += "\t" +"Q1"
-    message += "\t" + "Q2"
-    message += "\t" + "Q3"
-    message += "\t" + "Q4"
-    message += "\t" + "Q5"
-    message += "\t" + "Q6"
-    message += "\t" + "Q7"
-    message += "\t" + "Q8"
-    message += "\t" + "Q9"
-    message += "\t" + "Q10"
-    message += "\t" + "Q11"
-    message += "\t" + "Q12"
-    message += "\t\t" + "delay_counter"
-    message += "\t\t" + "created_at"
-    message += "\n"
-
-    for i in surveys:
-        message += str(i.author)
-        message += "\t" +str(i.question1)
-        message += "\t" + str(i.question2)
-        message += "\t" + str(i.question3)
-        message += "\t" + str(i.question4)
-        message += "\t" + str(i.question5)
-        message += "\t" + str(i.question6)
-        message += "\t" + str(i.question7)
-        message += "\t" + str(i.question8)
-        message += "\t" + str(i.question9)
-        message += "\t" + str(i.question10)
-        message += "\t" + str(i.question11)
-        message += "\t" + str(i.question12)
-        message += "\t\t" + str(i.delay_counter)
-        message += "\t\t\t\t" + str(i.created_at)
-        message += "\n"
-    return message
-
-def sendEmail():
-    #gets all other information
-    message = formatMessage()
-    recipients = getEmailsFromFile()
-    
-
-    ##send email Need to add information about email you are sending it from here
-    my_host = 'smtp.gmail.com'
-    my_port = 587
-    my_username = '@gmail.com'
-    my_password = ''
-    my_use_tls = True 
-    print "Hello World"
-    ##Creates connection to the mail server
-    connection = get_connection(host=my_host, port=my_port, username=my_username, password=my_password, use_tls=my_use_tls) 
-
-    ##Send the email to the array/list of Email recipients
-    try:
-        send_mail('Survey', message, my_username, recipients, connection = connection)
-    except Exception:
-        print "Message failed to send"
 
