@@ -13,6 +13,7 @@ from django.core.validators import validate_email
 from datetime import timedelta
 from django.utils import timezone
 from .models import Patient, Survey
+from django.core import mail
 
 SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 
@@ -21,9 +22,10 @@ def complain():
     sendEmail()
 
 def getEmailInformation(csv):
-	csv = csv.replace(" ", "")
-	recipients = csv.split(",")
-	return recipients
+    csv = csv.replace("\n", "")
+    csv = csv.replace(" ", "")
+    recipients = csv.split(",")
+    return recipients
 
 def getEmailsFromFile():
     return getEmailInformation(getEmailsRawFromFile())
@@ -85,13 +87,54 @@ def formatMessage():
         message += "\t\t\t\t" + str(i.created_at)
         message += "\n"
     return message
+def createCSV():
+    lastWeek = timezone.now().date() - timedelta(days=7)#get last week Date to get one week of Information for the email
+
+    surveys = list(Survey.objects.filter(created_at__gte=lastWeek))
+    message  = ""
+    message += "ID"
+    message += "," +"Q1"
+    message += "," + "Q2"
+    message += "," + "Q3"
+    message += "," + "Q4"
+    message += "," + "Q5"
+    message += "," + "Q6"
+    message += "," + "Q7"
+    message += "," + "Q8"
+    message += "," + "Q9"
+    message += "," + "Q10"
+    message += "," + "Q11"
+    message += "," + "Q12"
+    message += "," + "delay_counter"
+    message += "," + "created_at"
+    message += "\n"
+
+    for i in surveys:
+        message += str(i.author)
+        message += "," +str(i.question1)
+        message += "," + str(i.question2)
+        message += "," + str(i.question3)
+        message += "," + str(i.question4)
+        message += "," + str(i.question5)
+        message += "," + str(i.question6)
+        message += "," + str(i.question7)
+        message += "," + str(i.question8)
+        message += "," + str(i.question9)
+        message += "," + str(i.question10)
+        message += "," + str(i.question11)
+        message += "," + str(i.question12)
+        message += "," + str(i.delay_counter)
+        message += "," + str(i.created_at)
+        message += "\n"
+        myfile = open(SITE_ROOT + "/message.csv", 'w')
+        myfile.write(message)
 
 def sendEmail():
     #gets all other information
     #saveEmails("jackiscool20@gmail.com")
     message = formatMessage()
     recipients = getEmailsFromFile()
-    
+    createCSV()
     
     ##send email Need to add information about email you are sending it from here
     my_host = 'smtp.gmail.com'
@@ -101,9 +144,11 @@ def sendEmail():
     my_use_tls = True 
     ##Creates connection to the mail server
     connection = get_connection(host=my_host, port=my_port, username=my_username, password=my_password, use_tls=my_use_tls) 
-
+    email = mail.EmailMessage('Survey', message, my_username, recipients, connection = connection)
+    email.attach_file(SITE_ROOT + "/message.csv")
     ##Send the email to the array/list of Email recipients
+    
     try:
-        send_mail('Survey', message, my_username, recipients, connection = connection)
+        email.send()
     except Exception:
-        print "Message failed to send"
+       print "Message failed to send"
