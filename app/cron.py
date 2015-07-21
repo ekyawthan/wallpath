@@ -126,8 +126,8 @@ def createCSV():
         message += "," + str(i.delay_counter)
         message += "," + str(i.created_at)
         message += "\n"
-        myfile = open(SITE_ROOT + "/message.csv", 'w')
-        myfile.write(message)
+    myfile = open(SITE_ROOT + "/message.csv", 'w')
+    myfile.write(message)
 
 def sendEmail():
     #gets all other information
