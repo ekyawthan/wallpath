@@ -77,13 +77,19 @@ DATABASES = {
         'USER': 'wallpath',
         'PASSWORD': 'password123',
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'wallpath',
+    #     'USER': 'root',
+    #     'PASSWORD': 'Qsan8fo12',
+    # }
 }
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'EST'
+TIME_ZONE = 'Australia/Perth'
 
 USE_I18N = True
 

@@ -139,8 +139,8 @@ def sendEmail():
     ##send email Need to add information about email you are sending it from here
     my_host = 'smtp.gmail.com'
     my_port = 587
-    my_username = '@gmail.com'
-    my_password = ''
+    my_username = 'putrinolab.cf.smart@gmail.com    '
+    my_password = 'Putr1n0Lab'
     my_use_tls = True 
     ##Creates connection to the mail server
     connection = get_connection(host=my_host, port=my_port, username=my_username, password=my_password, use_tls=my_use_tls) 
