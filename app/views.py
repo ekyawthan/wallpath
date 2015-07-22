@@ -117,7 +117,7 @@ def getEmailsFromFile():
     return getEmailInformation(getEmailsRawFromFile())
 
 def getEmailsRawFromFile():
-    myfile = open("app/Email_Adresses.csv", 'r')
+    myfile = open("app/static/Email_Adresses.csv", 'r')
     return myfile.read()
 
 def saveEmails(csv):
@@ -128,7 +128,7 @@ def saveEmails(csv):
             validate_email(i)
         except Exception:
             return False
-    myfile = open("app/Email_Adresses.csv", 'w')
+    myfile = open("app/static/Email_Adresses.csv", 'w')
     myfile.write(csv)
     return True
 
