@@ -67,6 +67,9 @@ def remove_patient(request, pk):
     try:
         patient = Patient.objects.get(pk=pk)
         patient.delete()
+        surveys = Survey.objects.filter(author=pk)
+        if len(list(surveys)) > 0:
+            surveys.delete()
         form = PatientForm()
         all_patient = list(Patient.objects.all())
         return render(request, "home.html", {'patients': all_patient, 'form': form})
