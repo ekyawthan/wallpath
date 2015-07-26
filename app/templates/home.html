@@ -4,83 +4,78 @@
 {% load bootstrap3 %}
 {% block content %}
 
- <header class="header black-bg">
-              <div class="sidebar-toggle-box">
-                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
-              </div>
-            <!--logo start-->
-            <a href="{% url 'home' %}" class="logo"><b>CF-Smart</b></a>
+<header class="header black-bg">
+    <div class="sidebar-toggle-box">
+        <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+    </div>
+    <!--logo start-->
+    <a href="{% url 'home' %}" class="logo"><b>CF-Smart</b></a>
+
+    <div class="top-menu">
+        <ul class="nav pull-right top-menu">
+            {% if not user.is_authenticated %}
+            <li> <a class="logout"
+                    href="{% url 'django.contrib.auth.views.login' %}">Sign in</a></li>
+            {% else %}
+            <li> <form class="logout" action="{% url 'emailsetup' %}">
+                <input class="btn btn-theme" type="submit" value="Configure Email">
+            </form>
+            </li>
+            <li >
+                <div class="logout">
+                    <form class="form-inline" role="form" action="{% url 'add_patient' %}" method="post">
+                        <div class="form-group">
+                            {% bootstrap_form form %}
+                        </div>
+                        <button type="submit" class="btn btn-theme">Add </button>
+                    </form>
+                </div>
+            <li><a class="logout" href="{% url 'django.contrib.auth.views.logout' %}">Logout</a></li>
 
 
 
-
-            <!--logo end-->
-
-            <div class="top-menu">
-            	<ul class="nav pull-right top-menu">
-                    {% if not user.is_authenticated %}
-                    <li> <a class="logout"
-				  href="{% url 'django.contrib.auth.views.login' %}">Sign in</a></li>
-                    {% else %}
-
-
-                    <li><a class="logout" href="{% url 'django.contrib.auth.views.logout' %}">Logout</a></li>
-                    {% endif %}
-            	</ul>
-            </div>
-        </header>
-
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</header>
 
 {% if  user.is_authenticated %}
 
+<div class="col-md-12 mt" style="height: 100%; overflow-y: auto; width: 100%; padding-top:60px; padding-bottom:80px">
 
-<div class="row mt"  style = 'padding-top:60px'>
-          		<div class="col-lg-12">
-          			<div class="form-panel">
-                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Add New Patient</h4>
-                      <form class="form-inline" role="form" action="{% url 'add_patient' %}" method="post">
-                          <div class="form-group">
-                                {% bootstrap_form form %}
-                          </div>
+    <table class="table">
+        <h4><i class="fa fa-angle-right"></i> Patient List
 
-                          <button type="submit" class="btn btn-theme">Add </button>
-                      </form>
-          			</div><!-- /form-panel -->
-          		</div><!-- /col-lg-12 -->
-          	</div><!-- /row -->
-            <form action="{% url 'emailsetup' %}">
-              <input class="btn btn-theme" type="submit" value="Configure Email">
-            </form>
-      <div class="col-md-12 mt" style="height: 100%;  width: 100%; padding-top:60px;">
+        </h4>
+        <hr>
 
-	                          <table class="table table-fixed">
-	                  	  	  <h4><i class="fa fa-angle-right"></i> Patient List
+        <thead>
+        <tr>
+            <th>Patient Id</th>
+            <th>Created At</th>
+            <th>Remove</th>
 
-                              </h4>
-	                  	  	  <hr>
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in patients %}
 
-	                              <thead>
-	                              <tr>
-	                                  <th>Patient Id</th>
+        <tr>
+            <td><a href="{% url 'patient_detail' i.user_name %}">{{i.user_name}}</a></td>
+            <td>{{i.created_at}}</td>
+            <td><button type="delete" class="btn btn-delete"><a href="{% url 'remove_id' i.user_name %}">Delete</a></button> </td>
 
-	                              </tr>
-	                              </thead>
-	                              <tbody>
-                                    {% for i in patients %}
+        </tr>
+        {% endfor %}
 
-	                              <tr>
-	                                  <td><a href="{% url 'patient_detail' i.user_name %}">{{i.user_name}}</a></td>
-	                              </tr>
-                                  {% endfor %}
-
-	                              </tbody>
-	                          </table>
-                            </div>
-	                  	  </div><! --/content-panel -->
-
-<div></div>
+        </tbody>
+    </table>
+</div>
+</div><! --/content-panel -->
 
 
- {% endif %}
+
+{% endif %}
 
 {% endblock content %}

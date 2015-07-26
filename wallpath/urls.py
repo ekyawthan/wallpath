@@ -5,15 +5,16 @@ from django.contrib.auth import views as auth_views
 
 
 urlpatterns = patterns('',
-
     url(r'^$', views.home, name="home"),
     url(r'^patient_detail/(?P<pk>.*)/$', views.patient_detail, name='patient_detail'),
     url(r'^add_patient/$', views.add_patient, name='add_patient'),
+    url(r'^remove/(?P<pk>.*)/$', views.remove_patient, name='remove_id'),
     url(r'^Email/$', views.Email, name='Email'), #This is going to be the link that sends the email
     url(r'^emailsetup/$', views.emailsetup, name='emailsetup'), #This is the setup page for the email
     url(r'^admin/', include(admin.site.urls)),
     url(r'^survey/$', views.survey_detail), #api call
     url(r'^user/(?P<pk>.*)/$', views.user_check),#api call
+    #url(r'^remove/(?P<pk>.*)/$', views.remove_patient, name='remove_id'),
 
     (r'^accounts/',
                         include('registration.backends.simple.urls')),

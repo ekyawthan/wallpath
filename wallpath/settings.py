@@ -61,29 +61,27 @@ WSGI_APPLICATION = 'wallpath.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
 #         'NAME': 'wallpath',
-#         'USER': 'root',
-#         'PASSWORD': 'Qsan8of12',
+#         'USER': 'wallpath',
+#         'PASSWORD': 'password123',
 #     }
-# }
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'wallpath',
-        'USER': 'wallpath',
-        'PASSWORD': 'password123',
-    }
     # 'default': {
     #     'ENGINE': 'django.db.backends.mysql',
     #     'NAME': 'wallpath',
     #     'USER': 'root',
     #     'PASSWORD': 'Qsan8fo12',
     # }
-}
+#}
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 

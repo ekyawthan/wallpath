@@ -33,6 +33,7 @@ def home(request):
     if request.user.is_authenticated():
         form = PatientForm()
         all_patient = list(Patient.objects.all())
+        all_patient = all_patient[::-1]
         return render(request, "home.html", {'patients': all_patient, 'form': form})
     return render(request,  template_name='home.html')
 
@@ -55,10 +56,25 @@ def add_patient(request):
             form.save()
             form = PatientForm()
             all_patient = list(Patient.objects.all())
+            all_patient = all_patient[:: -1]
             return render(request, "home.html", {'patients': all_patient, 'form': form})
         form = PatientForm()
         all_patient = list(Patient.objects.all())
         return render(request, "home.html", {'patients': all_patient, 'form': form})
+
+
+def remove_patient(request, pk):
+    try:
+        patient = Patient.objects.get(pk=pk)
+        patient.delete()
+        form = PatientForm()
+        all_patient = list(Patient.objects.all())
+        return render(request, "home.html", {'patients': all_patient, 'form': form})
+    except Patient.DoesNotExist:
+        form = PatientForm()
+        all_patient = list(Patient.objects.all())
+        return render(request, "home.html", {'patients': all_patient, 'form': form})
+
 
 
 @csrf_exempt

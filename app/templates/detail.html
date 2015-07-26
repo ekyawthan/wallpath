@@ -4,82 +4,82 @@
 {% load bootstrap3 %}
 {% block content %}
 
- <header class="header black-bg">
-              <div class="sidebar-toggle-box">
-                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
-              </div>
-            <!--logo start-->
-            <a href="{% url 'home' %}" class="logo"><b>Cf-Smart</b></a>
-            <!--logo end-->
+<header class="header black-bg">
+    <div class="sidebar-toggle-box">
+        <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+    </div>
+    <!--logo start-->
+    <a href="{% url 'home' %}" class="logo"><b>Cf-Smart</b></a>
+    <!--logo end-->
 
-            <div class="top-menu">
-            	<ul class="nav pull-right top-menu">
-                    {% if not user.is_authenticated %}
-                    <li> <a class="logout"
-				  href="{% url 'django.contrib.auth.views.login' %}">Sign in</a></li>
-                    {% else %}
+    <div class="top-menu">
+        <ul class="nav pull-right top-menu">
+            {% if not user.is_authenticated %}
+            <li> <a class="logout"
+                    href="{% url 'django.contrib.auth.views.login' %}">Sign in</a></li>
+            {% else %}
 
-                    <li><a class="logout" href="{% url 'django.contrib.auth.views.logout' %}">Logout</a></li>
-                    {% endif %}
-            	</ul>
-            </div>
-        </header>
+            <li><a class="logout" href="{% url 'django.contrib.auth.views.logout' %}">Logout</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</header>
 
 
 {% if  user.is_authenticated %}
 
-    <div class="col-md-12 mt" style="height: 100%; overflow-y: auto; width: 100%; padding-top:60px;">
+<div class="col-md-12 mt" style="height: 100%; overflow-y: auto; width: 100%; padding-top:60px;">
 
-	                          <table class="table">
-	                  	  	  <h4><i class="fa fa-angle-right"></i> Survey List</h4>
-	                  	  	  <hr>
-	                              <thead>
-	                              <tr>
+    <table class="table">
+        <h4><i class="fa fa-angle-right"></i> Survey List</h4>
+        <hr>
+        <thead>
+        <tr>
 
-	                                  <th>Q1</th>
-                                      <th>Q2</th>
-	                                  <th>Q3</th>
-                                      <th>Q4</th>
-                                      <th>Q5</th>
-	                                  <th>Q6</th>
-                                      <th>Q7</th>
-                                      <th>Q8</th>
-	                                  <th>Q9</th>
-                                      <th>Q10</th>
-                                      <th>Q11</th>
-	                                  <th>Q12</th>
-                                      <th>Delay</th>
-                                      <th>At</th>
+            <th>Q1</th>
+            <th>Q2</th>
+            <th>Q3</th>
+            <th>Q4</th>
+            <th>Q5</th>
+            <th>Q6</th>
+            <th>Q7</th>
+            <th>Q8</th>
+            <th>Q9</th>
+            <th>Q10</th>
+            <th>Q11</th>
+            <th>Q12</th>
+            <th>Delay</th>
+            <th>At</th>
 
-	                              </tr>
-	                              </thead>
-	                              <tbody>
-                                  {% for i in surveys %}
-	                              <tr>
-	                                  <th>{{i.question1}}</th>
-                                      <th>{{i.question2}}</th>
-	                                  <th>{{i.question3}}</th>
-	                                  <th>{{i.question4}}</th>
-	                                  <th>{{i.question5}}</th>
-	                                  <th>{{i.question6}}</th>
-                                      <th>{{i.question7}}</th>
-                                      <th>{{i.question8}}</th>
-	                                  <th>{{i.question9}}</th>
-	                                  <th>{{i.question10}}</th>
-	                                  <th>{{i.question11}}</th>
-	                                  <th>{{i.question12}}</th>
-                                      <th>{{i.delay_counter}}</th>
-                                      <th>{{i.created_at}}</th>
-
-
-	                              </tr>
-                                  {% endfor %}
-
-	                              </tbody>
-	                          </table>
-	                  	  </div><! --/content-panel -->
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in surveys %}
+        <tr>
+            <th>{{i.question1}}</th>
+            <th>{{i.question2}}</th>
+            <th>{{i.question3}}</th>
+            <th>{{i.question4}}</th>
+            <th>{{i.question5}}</th>
+            <th>{{i.question6}}</th>
+            <th>{{i.question7}}</th>
+            <th>{{i.question8}}</th>
+            <th>{{i.question9}}</th>
+            <th>{{i.question10}}</th>
+            <th>{{i.question11}}</th>
+            <th>{{i.question12}}</th>
+            <th>{{i.delay_counter}}</th>
+            <th>{{i.created_at}}</th>
 
 
- {% endif %}
+        </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+</div><! --/content-panel -->
+
+
+{% endif %}
 
 {% endblock content %}
