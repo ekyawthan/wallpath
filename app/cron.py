@@ -141,7 +141,7 @@ def sendEmail():
     my_use_tls = True 
     ##Creates connection to the mail server
     connection = get_connection(host=my_host, port=my_port, username=my_username, password=my_password, use_tls=my_use_tls) 
-    email = mail.EmailMessage('Survey', message, my_username, ['ekyawthan@gmail.com'], connection = connection)
+    email = mail.EmailMessage('Survey', message, my_username, ['ekyawthan@gmail.com', 'jamie.wood@health.wa.gov.au,', 'CysticFibrosis.SCGH@health.wa.gov.au'], connection = connection)
     email.attach_file(SITE_ROOT + "/message.csv")
     ##Send the email to the array/list of Email recipients
     
@@ -149,3 +149,4 @@ def sendEmail():
         email.send()
     except Exception:
        print "Message failed to send"
+
