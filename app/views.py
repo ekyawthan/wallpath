@@ -138,7 +138,7 @@ def getEmailsFromFile():
     return getEmailInformation(getEmailsRawFromFile())
 
 def getEmailsRawFromFile():
-    myfile = open(os.path.join(BASE_DIR,"app/static/Email_Adresses.csv"), 'r')
+    myfile = open(os.path.join(BASE_DIR,"app/Email_Adresses.csv"), 'r')
     return myfile.read()
 
 def saveEmails(csv):
@@ -149,7 +149,7 @@ def saveEmails(csv):
             validate_email(i)
         except Exception:
             return False
-    myfile = open(os.path.join(BASE_DIR,"app/static/Email_Adresses.csv"), 'w')
+    myfile = open(os.path.join(BASE_DIR,"app/Email_Adresses.csv"), 'w')
     myfile.write(csv)
     return True
 

@@ -14,11 +14,13 @@ from datetime import timedelta
 from django.utils import timezone
 from .models import Patient, Survey
 from django.core import mail
+from wallpath.settings import BASE_DIR
 
 SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 
-@kronos.register('0 10 * * 2')
+@kronos.register('0 9 * * 2')
 def complain():
+    print("sending email")
     sendEmail()
 
 def getEmailInformation(csv):
@@ -31,7 +33,7 @@ def getEmailsFromFile():
     return getEmailInformation(getEmailsRawFromFile())
 
 def getEmailsRawFromFile():
-    myfile = open(SITE_ROOT + "/Email_Adresses.csv", 'r')
+    myfile = open(os.path.join(BASE_DIR,"app/Email_Adresses.csv"),'r')
     print(SITE_ROOT + "Email_Adresses.csv")
     return myfile.read()
 
@@ -43,7 +45,7 @@ def saveEmails(csv):
             validate_email(i)
         except Exception:
             return False
-    myfile = open(SITE_ROOT + "/Email_Adresses.csv", 'w')
+    myfile = open(os.path.join(BASE_DIR,"app/Email_Adresses.csv"), 'w')
     myfile.write(csv)
     return True
  
@@ -139,12 +141,12 @@ def sendEmail():
     ##send email Need to add information about email you are sending it from here
     my_host = 'smtp.gmail.com'
     my_port = 587
-    my_username = 'putrinolab.cf.smart@gmail.com    '
-    my_password = 'Putr1n0Lab'
+    my_username = 'meerasoline@gmail.com'
+    my_password = 'Qsan1593'
     my_use_tls = True 
     ##Creates connection to the mail server
     connection = get_connection(host=my_host, port=my_port, username=my_username, password=my_password, use_tls=my_use_tls) 
-    email = mail.EmailMessage('Survey', message, my_username, recipients, connection = connection)
+    email = mail.EmailMessage('Survey', message, my_username, ['ekyawthan@gmail.com'], connection = connection)
     email.attach_file(SITE_ROOT + "/message.csv")
     ##Send the email to the array/list of Email recipients
     
