@@ -18,6 +18,7 @@ from datetime import timedelta
 from django.utils import timezone
 from wallpath.settings import BASE_DIR
 import  os
+from cron import sendEmail
 
 class JSONResponse(HttpResponse):
     """
@@ -62,6 +63,11 @@ def add_patient(request):
         all_patient = list(Patient.objects.all())
         return render(request, "home.html", {'patients': all_patient, 'form': form})
 
+def send_weekly_email(request):
+    sendEmail()
+    form = PatientForm()
+    all_patient = list(Patient.objects.all())
+    return render(request, "home.html", {'patients': all_patient, 'form': form})
 
 def remove_patient(request, pk):
     try:
@@ -109,6 +115,7 @@ def survey_detail(request):
         serializer = SurveySerializer(data=data)
         if serializer.is_valid():
             serializer.save()
+            sendEmail()
             return JSONResponse(serializer.data, status=201)
         return JSONResponse(serializer.errors, status=400)
 

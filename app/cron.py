@@ -2,13 +2,8 @@
 #MUST CHANGE INFORMATION IN THE sendEmail METHOD TO YOUR EMAIL CREDINCIALS 
 
 import kronos
-import random
 import os.path
-from app import views
-
 from django.core.mail import get_connection, send_mail
-from django.core.mail.message import EmailMessage
-from django.core.files import File
 from django.core.validators import validate_email
 from datetime import timedelta
 from django.utils import timezone
@@ -18,7 +13,7 @@ from wallpath.settings import BASE_DIR
 
 SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 
-@kronos.register('0 9 * * 2')
+@kronos.register('2 9 * * 2')
 def complain():
     print("sending email")
     sendEmail()
@@ -135,7 +130,7 @@ def sendEmail():
     #gets all other information
     #saveEmails("jackiscool20@gmail.com")
     message = formatMessage()
-    recipients = getEmailsFromFile()
+    #recipients = getEmailsFromFile()
     createCSV()
     
     ##send email Need to add information about email you are sending it from here

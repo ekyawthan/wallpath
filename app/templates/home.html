@@ -17,10 +17,12 @@
             <li> <a class="logout"
                     href="{% url 'django.contrib.auth.views.login' %}">Sign in</a></li>
             {% else %}
-            <li> <form class="logout" action="{% url 'emailsetup' %}">
-                <input class="btn btn-theme" type="submit" value="Configure Email">
-            </form>
-            </li>
+
+
+            <!--<li> <form class="logout" action="{% url 'emailsetup' %}">-->
+                <!--<input class="btn btn-theme" type="submit" value="Configure Email">-->
+            <!--</form>-->
+            <!--</li>-->
             <li >
                 <div class="logout">
                     <form class="form-inline" role="form" action="{% url 'add_patient' %}" method="post">
@@ -30,11 +32,11 @@
                         <button type="submit" class="btn btn-theme">Add </button>
                     </form>
                 </div>
+            </li>
+            <li><a class="logout" href="{% url 'send_weekly_email' %}">Send Weekly Email</a></li>
+            <li><a class="logout" href="{% url 'emailsetup' %}">Configure Email</a></li>
             <li><a class="logout" href="{% url 'django.contrib.auth.views.logout' %}">Logout</a></li>
 
-
-
-            </li>
             {% endif %}
         </ul>
     </div>

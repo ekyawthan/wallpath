@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     url(r'^patient_detail/(?P<pk>.*)/$', views.patient_detail, name='patient_detail'),
     url(r'^add_patient/$', views.add_patient, name='add_patient'),
     url(r'^remove/(?P<pk>.*)/$', views.remove_patient, name='remove_id'),
+    url(r'^send_weekly_eamil/', views.send_weekly_email, name='send_weekly_email'),
     url(r'^Email/$', views.Email, name='Email'), #This is going to be the link that sends the email
     url(r'^emailsetup/$', views.emailsetup, name='emailsetup'), #This is the setup page for the email
     url(r'^admin/', include(admin.site.urls)),
