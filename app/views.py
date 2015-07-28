@@ -9,15 +9,11 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from django.shortcuts import render
 from .forms import PatientForm
+import thread
 
-from django.core.mail import get_connection, send_mail
-from django.core.mail.message import EmailMessage
-from django.core.files import File
 from django.core.validators import validate_email
-from datetime import timedelta
-from django.utils import timezone
 from wallpath.settings import BASE_DIR
-import  os
+import os
 from cron import sendEmail
 
 class JSONResponse(HttpResponse):
@@ -115,7 +111,7 @@ def survey_detail(request):
         serializer = SurveySerializer(data=data)
         if serializer.is_valid():
             serializer.save()
-            sendEmail()
+            #sendEmail()
             return JSONResponse(serializer.data, status=201)
         return JSONResponse(serializer.errors, status=400)
 
